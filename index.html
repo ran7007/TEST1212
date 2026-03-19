@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q2 위험 점검표</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="failOverlay" class="fail-overlay" hidden>
+      <div class="fail-dialog">
+        <strong class="fail-title">실패!! 일하세요</strong>
+        <button id="retryBtn" type="button" class="retry-btn">다시하기</button>
+      </div>
+    </div>
+
+    <header class="toolbar">
+      <div class="toolbar-left">
+        <div class="dot-group">
+          <span class="dot green"></span>
+          <span class="dot yellow"></span>
+          <span class="dot red"></span>
+        </div>
+        <div class="sheet-title">Q2_Risk_Matrix.xlsx</div>
+      </div>
+      <div class="toolbar-right">
+        <span class="badge">자동 저장됨</span>
+        <span class="badge">공유됨</span>
+      </div>
+    </header>
+
+    <section class="formula-bar">
+      <div class="name-box">H12</div>
+      <div class="fx-box">fx</div>
+      <div class="formula-input">=IF(RISK_LEVEL&gt;0,"검토","대기")</div>
+    </section>
+
+    <main class="workspace">
+      <aside class="side-panel">
+        <div class="panel-card">
+          <p class="panel-label">게임 설명</p>
+          <strong>업무용 표 속에 숨겨진 폭탄을 피해 모든 안전 셀을 여는 게임입니다.</strong>
+          <p class="panel-copy">숫자는 주변 위험 셀 수를 뜻합니다. 안전 셀을 연속으로 많이 열수록 점수가 커지고, 시트를 끝내면 다음 점검표로 넘어갑니다.</p>
+        </div>
+        <div class="panel-card">
+          <p class="panel-label">검토 현황</p>
+          <strong id="statusText">점검 진행 중</strong>
+          <p id="subStatus" class="panel-copy">안전한 셀을 열어 숨겨진 위험 위치를 분류하세요.</p>
+        </div>
+        <div class="panel-card compact">
+          <div class="metric">
+            <span>현재 시트</span>
+            <strong id="stageLabel">1 / 3</strong>
+          </div>
+          <div class="metric">
+            <span>남은 위험</span>
+            <strong id="mineCount">18</strong>
+          </div>
+          <div class="metric">
+            <span>진행 시간</span>
+            <strong id="timer">00:00</strong>
+          </div>
+          <div class="metric">
+            <span>표시 메모</span>
+            <strong id="flagCount">0</strong>
+          </div>
+        </div>
+        <div class="panel-card compact">
+          <div class="metric">
+            <span>누적 점수</span>
+            <strong id="scoreValue">0</strong>
+          </div>
+          <div class="metric">
+            <span>연속 배수</span>
+            <strong id="comboValue">x1</strong>
+          </div>
+          <div class="metric">
+            <span>실수 허용</span>
+            <strong id="livesValue">3</strong>
+          </div>
+        </div>
+        <div class="panel-card compact">
+          <button id="resetBtn" type="button">시트 다시 시작</button>
+          <p class="tip">클릭: 셀 열기</p>
+          <p class="tip">우클릭 / Shift+클릭: 메모 표시</p>
+          <p class="tip">시트를 완료하면 다음 단계로 자동 이동</p>
+        </div>
+      </aside>
+
+      <section class="sheet-wrap">
+        <div class="sheet-topbar">
+          <span id="sheetName">2026 내부 점검표</span>
+          <span id="sheetMeta" class="sheet-meta">부서별 이상치 검토</span>
+        </div>
+
+        <div class="sheet-grid-wrap">
+          <table class="sheet-grid" aria-label="위험 점검 게임 보드">
+            <thead>
+              <tr id="columnHeaderRow">
+                <th class="corner-cell"></th>
+              </tr>
+            </thead>
+            <tbody id="boardBody"></tbody>
+          </table>
+        </div>
+
+        <div class="sheet-tabs">
+          <button class="tab active" type="button">위험 점검표</button>
+          <button class="tab" type="button">주간 합계</button>
+          <button class="tab" type="button">원본 데이터</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
